@@ -7,9 +7,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 
 /**
  * A simple HTTP servlet request which is not connected to any input stream.
@@ -27,6 +28,24 @@ public class VoidInputHttpServletRequest extends HttpServletRequestWrapper {
     public ServletInputStream getInputStream() {
         if (in != null) return in;
         return in = new ServletInputStream() {
+            @Override
+            public boolean isFinished()
+            {
+                return false;
+            }
+
+            @Override
+            public boolean isReady()
+            {
+                return false;
+            }
+
+            @Override
+            public void setReadListener(ReadListener readListener)
+            {
+
+            }
+
             public int read() throws IOException {
                 return -1;
             }

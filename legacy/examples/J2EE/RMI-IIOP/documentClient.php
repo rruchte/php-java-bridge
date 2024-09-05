@@ -101,14 +101,14 @@ destroyDocument($doc);
  */
 function createDocument($jndiname, $serverArgs) {
   // find initial context
-  $initial = new java("javax.naming.InitialContext", $serverArgs);
+  $initial = new java("jakarta.naming.InitialContext", $serverArgs);
   
   // find the service
   $objref  = $initial->lookup("$jndiname");
   
   // access the home interface
   $DocumentHome = new JavaClass("DocumentHome");
-  $PortableRemoteObject = new JavaClass("javax.rmi.PortableRemoteObject");
+  $PortableRemoteObject = new JavaClass("jakarta.rmi.PortableRemoteObject");
   $home=$PortableRemoteObject->narrow($objref, $DocumentHome);
 
   // create a new remote document and return it

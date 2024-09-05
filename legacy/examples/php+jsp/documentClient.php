@@ -40,14 +40,14 @@ if($_GET['logout']) {
  */
 function createDocument($jndiname, $serverArgs) {
   // find initial context
-  $initial = new java("javax.naming.InitialContext", $serverArgs);
+  $initial = new java("jakarta.naming.InitialContext", $serverArgs);
   
   try {
     // find the service
     $objref  = $initial->lookup("$jndiname");
     
     // access the home interface
-    $home = java("javax.rmi.PortableRemoteObject")->narrow($objref, java("DocumentHome"));
+    $home = java("jakarta.rmi.PortableRemoteObject")->narrow($objref, java("DocumentHome"));
     if(java_is_null($home)) throw new Exception("home");
 
     // create a new remote document and return it

@@ -28,9 +28,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.WriteListener;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
 
 /**
  * A servlet response which writes its output to an internal buffer. The buffer can be fetched using
@@ -67,6 +68,17 @@ public class RemoteHttpServletResponse extends HttpServletResponseWrapper implem
     public ServletOutputStream getOutputStream() throws IOException {
         if (out != null) return out;
         return out = new ServletOutputStream() {
+            @Override
+            public boolean isReady()
+            {
+                return true;
+            }
+
+            @Override
+            public void setWriteListener(WriteListener writeListener)
+            {
+            }
+
             public void write(byte[] arg0, int arg1, int arg2) throws IOException {
                 buffer.write(arg0, arg1, arg2);
             }

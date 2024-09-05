@@ -12,9 +12,9 @@ try {
   $encrypted = $algorithm->digest();
   $out = new java("java.io.ByteArrayOutputStream");
 
-  java_inspect(java("javax.mail.internet.MimeUtility"));
+  java_inspect(java("jakarta.mail.internet.MimeUtility"));
 
-  $encoder = java("javax.mail.internet.MimeUtility")->encode($out, "base64");
+  $encoder = java("jakarta.mail.internet.MimeUtility")->encode($out, "base64");
   $encoder->write($encrypted);
   $encoder->flush();
   echo new java("java.lang.String",$out->toByteArray()); echo "\n";

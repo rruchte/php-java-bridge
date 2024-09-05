@@ -25,8 +25,8 @@ package io.soluble.pjb.servlet;
  */
 
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
 
 final class SimpleHttpServletResponse extends HttpServletResponseWrapper implements BufferedResponse {
 

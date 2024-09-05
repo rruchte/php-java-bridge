@@ -11,10 +11,10 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.script.ScriptContext;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import io.soluble.pjb.bridge.ILogger;
 import io.soluble.pjb.bridge.NotImplementedException;

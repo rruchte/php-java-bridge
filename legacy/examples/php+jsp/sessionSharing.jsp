@@ -3,7 +3,7 @@
 <BODY>
 <%
 
-javax.servlet.http.HttpSession $session = request.getSession();
+jakarta.servlet.http.HttpSession $session = request.getSession();
 if($session.getAttribute("counter")==null) {
   $session.setAttribute("counter", new java.lang.Integer(1));
 }

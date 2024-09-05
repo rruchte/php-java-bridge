@@ -24,7 +24,7 @@ if(!class_exists("java_Tag")) {
       $this->response = $ctx->getAttribute("php.java.servlet.HttpServletResponse");
       $this->request = $ctx->getAttribute("php.java.servlet.HttpServletRequest");
 
-      $factory = java("javax.servlet.jsp.JspFactory")->getDefaultFactory();
+      $factory = java("jakarta.servlet.jsp.JspFactory")->getDefaultFactory();
       $this->pc = $factory->getPageContext($this->servlet, $this->request, $this->response, null, true, 8192, false);
       $this->out = $this->pc->out;
 
@@ -66,9 +66,9 @@ if(!class_exists("java_Tag")) {
      */
     function start() {
       $this->evalTag = java_values($this->clazz->doStartTag());
-      if($this->evalTag != java_values(Java("javax.servlet.jsp.tagext.Tag")->SKIP_BODY)) {
+      if($this->evalTag != java_values(Java("jakarta.servlet.jsp.tagext.Tag")->SKIP_BODY)) {
 	$this->noend=true;
-	if($this->evalTag == java_values(Java("javax.servlet.jsp.tagext.Tag")->EVAL_BODY_INCLUDE)) {
+	if($this->evalTag == java_values(Java("jakarta.servlet.jsp.tagext.Tag")->EVAL_BODY_INCLUDE)) {
 	  $out = $this->pc->pc->pushBody();
 	  $this->clazz->setBodyContent($out);
 	  $this->clazz->doInitBody();
@@ -84,7 +84,7 @@ if(!class_exists("java_Tag")) {
      */
     function repeat() {
       $evalDoAfterBody = java_values($this->clazz->doAfterBody());
-      if ($evalDoAfterBody != java_values(Java("javax.servlet.jsp.tagext.BodyTag")->EVAL_BODY_AGAIN)) {
+      if ($evalDoAfterBody != java_values(Java("jakarta.servlet.jsp.tagext.BodyTag")->EVAL_BODY_AGAIN)) {
 	return false;
       }
 
@@ -96,7 +96,7 @@ if(!class_exists("java_Tag")) {
      */
     function end($autoflush = true) {
       if(!$this->noend) {
-	if ($this->evalTag != java_values(Java("javax.servlet.jsp.tagext.Tag")->EVAL_BODY_INCLUDE)) {
+	if ($this->evalTag != java_values(Java("jakarta.servlet.jsp.tagext.Tag")->EVAL_BODY_INCLUDE)) {
 	  $this->pc->pc->popBody();
 	}
       }

@@ -15,8 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletContextEvent;
 
 import io.soluble.pjb.bridge.ILogger;
 import io.soluble.pjb.bridge.ThreadPool;
@@ -67,7 +67,7 @@ import io.soluble.pjb.servlet.fastcgi.FCGIProcess;
  * </code>
  * </blockquote>
  */
-public class ContextLoaderListener implements javax.servlet.ServletContextListener, IFCGIProcessFactory {
+public class ContextLoaderListener implements jakarta.servlet.ServletContextListener, IFCGIProcessFactory {
     private LinkedList closeables = new LinkedList();
 
     public static final String PEAR_DIR = "/WEB-INF/pear";

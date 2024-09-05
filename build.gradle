@@ -56,7 +56,7 @@ dependencies {
 
     testCompile('junit:junit:3.8.2')    // the test code still uses this junit API
 
-    providedCompile('javax.servlet:servlet-api:2.5')
+    providedCompile('jakarta.servlet:jakarta.servlet-api:5.0.0')
 
     def tomcatVersion = '8.5.16'
 

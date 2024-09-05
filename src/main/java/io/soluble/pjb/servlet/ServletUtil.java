@@ -14,9 +14,9 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import io.soluble.pjb.bridge.Util;
 import io.soluble.pjb.bridge.http.WriterOutputStream;
@@ -145,25 +145,25 @@ public class ServletUtil {
      */
     public static int getMBeanProperty(String pattern, String property) {
         try {
-            Class objectNameClazz = Class.forName("javax.management.ObjectName");
+            Class objectNameClazz = Class.forName("jakarta.management.ObjectName");
             Constructor constructor = objectNameClazz.getConstructor(new Class[]{String.class});
             Object objectName = constructor.newInstance(new Object[]{pattern});
 
 
-            Class clazz = Class.forName("javax.management.MBeanServerFactory");
+            Class clazz = Class.forName("jakarta.management.MBeanServerFactory");
             Method method = clazz.getMethod("findMBeanServer", new Class[]{String.class});
             ArrayList servers = (ArrayList) method.invoke(clazz, new Object[]{null});
             Object server = servers.get(0);
 
-            Class mBeanServerClazz = Class.forName("javax.management.MBeanServer");
-            clazz = Class.forName("javax.management.QueryExp");
+            Class mBeanServerClazz = Class.forName("jakarta.management.MBeanServer");
+            clazz = Class.forName("jakarta.management.QueryExp");
             method = mBeanServerClazz.getMethod("queryMBeans", new Class[]{objectNameClazz, clazz});
 
             Set s = (Set) method.invoke(server, new Object[]{objectName, null});
             Iterator ii = s.iterator();
 
             if (ii.hasNext()) {
-                clazz = Class.forName("javax.management.ObjectInstance");
+                clazz = Class.forName("jakarta.management.ObjectInstance");
                 method = clazz.getMethod("getObjectName", Util.ZERO_PARAM);
                 objectName = method.invoke(ii.next(), Util.ZERO_ARG);
 

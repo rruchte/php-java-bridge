@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import io.soluble.pjb.bridge.NotImplementedException;
 import io.soluble.pjb.bridge.Util;
@@ -142,7 +142,7 @@ public class HttpContext extends io.soluble.pjb.bridge.http.Context {
      * Outside of a servlet environment use the ContextLoaderListener instead:
      * Either the Standalone or the JSR223 Standalone (see PhpScriptContext).
      *
-     * @param closeable The manageable beforeShutdown(), will be called by the {@link ContextLoaderListener#contextDestroyed(javax.servlet.ServletContextEvent)}
+     * @param closeable The manageable beforeShutdown(), will be called by the {@link ContextLoaderListener#contextDestroyed(jakarta.servlet.ServletContextEvent)}
      * @param ctx       The ServletContext
      */
     public static void handleManaged(Object closeable, ServletContext ctx) {

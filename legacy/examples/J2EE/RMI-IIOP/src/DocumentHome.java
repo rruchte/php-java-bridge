@@ -1,6 +1,6 @@
 import java.rmi.RemoteException;
-import javax.ejb.CreateException;
-import javax.ejb.EJBHome;
+import jakarta.ejb.CreateException;
+import jakarta.ejb.EJBHome;
 
 // This interface defines the methods to create a DocumentBean.
 public interface DocumentHome extends EJBHome {

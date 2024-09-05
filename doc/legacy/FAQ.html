@@ -572,7 +572,7 @@ In JBoss' default setup the code:
 <code>
   // access the home interface<br>
   $DocumentHome = java("DocumentHome");<br>
-  $PortableRemoteObject = java("javax.rmi.PortableRemoteObject");<br>
+  $PortableRemoteObject = java("jakarta.rmi.PortableRemoteObject");<br>
   $home=$PortableRemoteObject-&gt;narrow($objref, $DocumentHome);<br>
 </code>
 </blockquote>
@@ -901,21 +901,21 @@ $ctx = java_context();<br>
 $servlet = $ctx-&gt;getAttribute("php.java.servlet.Servlet");<br>
 $response = $ctx-&gt;getAttribute("php.java.servlet.HttpServletResponse");<br>
 $request = $ctx-&gt;getAttribute("php.java.servlet.HttpServletRequest");<br>
-$factory = java("javax.servlet.jsp.JspFactory")-&gt;getDefaultFactory();<br>
+$factory = java("jakarta.servlet.jsp.JspFactory")-&gt;getDefaultFactory();<br>
 $pc = $factory-&gt;getPageContext($servlet, $request, $response, null, true, 8192, false);<br>
 <br>
 $tag-&gt;setPageContext($pc);<br>
 $value = $tag-&gt;doStartTag();<br>
-if(($value != Java("javax.servlet.jsp.tagext.Tag")-&gt;SKIP_BODY) {<br>
-&nbsp;&nbsp;if($value != Java("javax.servlet.jsp.tagext.Tag")-&gt;EVAL_BODY_INCLUDE)) {<br>
+if(($value != Java("jakarta.servlet.jsp.tagext.Tag")-&gt;SKIP_BODY) {<br>
+&nbsp;&nbsp;if($value != Java("jakarta.servlet.jsp.tagext.Tag")-&gt;EVAL_BODY_INCLUDE)) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;$tag-&gt;setBodyContent($pc-&gt;pushBody());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;$tag-&gt;doInitBody();<br>
 &nbsp;&nbsp;}<br>
 &nbsp;&nbsp;do {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;} while($tag-&gt;doAfterBody() == Java("javax.servlet.jsp.tagext.BodyTag")-&gt;EVAL_BODY_AGAIN)<br>
+&nbsp;&nbsp;} while($tag-&gt;doAfterBody() == Java("jakarta.servlet.jsp.tagext.BodyTag")-&gt;EVAL_BODY_AGAIN)<br>
 }<br>
-if($value != Java("javax.servlet.jsp.tagext.Tag")-&gt;EVAL_BODY_INCLUDE) $pc-&gt;popBody();<br>
+if($value != Java("jakarta.servlet.jsp.tagext.Tag")-&gt;EVAL_BODY_INCLUDE) $pc-&gt;popBody();<br>
 $tag-&gt;doEndTag();<br>
 </blockquote>
 </code>

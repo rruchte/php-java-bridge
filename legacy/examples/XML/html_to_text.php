@@ -89,7 +89,7 @@ function createHandler() {
 }
 
 // Standard SAX handling
-$ParserFactory=new JavaClass("javax.xml.parsers.SAXParserFactory");
+$ParserFactory=new JavaClass("jakarta.xml.parsers.SAXParserFactory");
 $parser=$ParserFactory->newInstance()->newSaxParser()->getParser();
 
 $handler=createHandler();

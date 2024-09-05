@@ -24,7 +24,7 @@ package io.soluble.pjb.bridge;
 
 /**
  * Classes which implement this interface receive a notification before their container terminates.
- * This usually happens when the  ContextLoaderListener.contextDestroyed(javax.servlet.ServletContextEvent)
+ * This usually happens when the  ContextLoaderListener.contextDestroyed(jakarta.servlet.ServletContextEvent)
  * is called or right before the VM terminates.
  *
  * @author jostb

@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import io.soluble.pjb.bridge.Util;
 import io.soluble.pjb.bridge.http.AbstractChannelName;
@@ -153,22 +153,22 @@ public class FastCGIServlet extends HttpServlet {
         env.allHeaders = new ArrayList();
         env.includedJava = contextLoaderListener.getPhpIncludeJava() && PhpJavaServlet.getHeader(Util.X_JAVABRIDGE_INCLUDE, req) == null;
 
-        env.contextPath = (String) req.getAttribute("javax.servlet.include.context_path");
+        env.contextPath = (String) req.getAttribute("jakarta.servlet.include.context_path");
         if (env.contextPath == null) env.contextPath = req.getContextPath();
 
-        env.pathInfo = (String) req.getAttribute("javax.servlet.include.path_info");
+        env.pathInfo = (String) req.getAttribute("jakarta.servlet.include.path_info");
         if (env.pathInfo == null) env.pathInfo = req.getPathInfo();
 
-        env.servletPath = (String) req.getAttribute("javax.servlet.include.servlet_path");
+        env.servletPath = (String) req.getAttribute("jakarta.servlet.include.servlet_path");
         if (env.servletPath == null) env.servletPath = req.getServletPath();
 
-        env.queryString = (String) req.getAttribute("javax.servlet.include.query_string");
+        env.queryString = (String) req.getAttribute("jakarta.servlet.include.query_string");
         if (env.queryString == null) env.queryString = req.getQueryString();
 
         if (phpRequestURIisUnique) { // use target: my.jsp:include||forward target.php => REQUEST_URI: target.php
-            env.requestUri = (String) req.getAttribute("javax.servlet.include.request_uri");
+            env.requestUri = (String) req.getAttribute("jakarta.servlet.include.request_uri");
         } else {                     // use source: my.jsp:include||forward target.php => REQUEST_URI: my.jsp
-            env.requestUri = (String) req.getAttribute("javax.servlet.forward.request_uri");
+            env.requestUri = (String) req.getAttribute("jakarta.servlet.forward.request_uri");
         }
         if (env.requestUri == null) env.requestUri = req.getRequestURI();
     }
@@ -555,8 +555,8 @@ public class FastCGIServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         if (Util.logLevel > 4) {
-            if (req.getAttribute("javax.servlet.include.request_uri") != null)
-                log("doGet (included):" + req.getAttribute("javax.servlet.include.request_uri"));
+            if (req.getAttribute("jakarta.servlet.include.request_uri") != null)
+                log("doGet (included):" + req.getAttribute("jakarta.servlet.include.request_uri"));
             log("doGet:" + req.getRequestURI());
         }
         handle(req, res);
