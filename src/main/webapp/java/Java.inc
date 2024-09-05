@@ -2933,6 +2933,7 @@ if (!function_exists("java_get_base"))
             return $this->current() !== false;
         }
 
+        #[\ReturnTypeWillChange]
         function next()
         {
             return next($this->var);
@@ -2951,6 +2952,7 @@ if (!function_exists("java_get_base"))
 
     class java_IteratorProxy extends java_JavaProxy implements IteratorAggregate
     {
+        #[\ReturnTypeWillChange]
         function getIterator()
         {
             return new java_ObjectIterator($this);
@@ -2971,12 +2973,14 @@ if (!function_exists("java_get_base"))
             return $this->__client->invokeMethod(0, "offsetGet", $ar);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetSet($idx, $val)
         {
             $ar = [$this, $idx, $val];
             return $this->__client->invokeMethod(0, "offsetSet", $ar);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetUnset($idx)
         {
             $ar = [$this, $idx];
@@ -3076,6 +3080,7 @@ if (!function_exists("java_get_base"))
             return $this->__delegate->__toString();
         }
 
+        #[\ReturnTypeWillChange]
         function getIterator()
         {
             if (!isset($this->__delegate))
@@ -3089,6 +3094,7 @@ if (!function_exists("java_get_base"))
             $args = func_get_args();
             return $this->__call("getIterator", $args);
         }
+
 
         function offsetExists($idx)
         {
@@ -3104,6 +3110,7 @@ if (!function_exists("java_get_base"))
             return $this->__call("offsetExists", $args);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetGet($idx)
         {
             if (!isset($this->__delegate))
@@ -3118,6 +3125,7 @@ if (!function_exists("java_get_base"))
             return $this->__call("offsetGet", $args);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetSet($idx, $val)
         {
             if (!isset($this->__delegate))
@@ -3132,6 +3140,7 @@ if (!function_exists("java_get_base"))
             return $this->__call("offsetSet", $args);
         }
 
+        #[\ReturnTypeWillChange]
         function offsetUnset($idx)
         {
             if (!isset($this->__delegate))
