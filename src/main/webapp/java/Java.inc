@@ -87,8 +87,8 @@ if (!function_exists("java_get_base"))
         {
             return false;
         }
-        $i = "class ${x} extends Java {" .
-            "static function type(\$sub=null){if(\$sub) \$sub='\$'.\$sub; return java('${s}'.\"\$sub\");}" .
+        $i = "class {$x} extends Java {" .
+            "static function type(\$sub=null){if(\$sub) \$sub='\$'.\$sub; return java('{$s}'.\"\$sub\");}" .
             'function __construct() {$args=func_get_args();' .
             'array_unshift($args,' . "'$s'" . '); parent::__construct($args);}}';
         eval ("$i");
@@ -110,9 +110,9 @@ if (!function_exists("java_get_base"))
         }
         $package  = substr($x, 0, $idx);
         $name     = substr($x, 1 + $idx);
-        $instance = "namespace $package; class ${name} extends \\Java {" .
-            "static function type(\$sub=null){if(\$sub) \$sub='\$'.\$sub;return \\java('${str}'.\"\$sub\");}" .
-            "static function __callStatic(\$procedure,\$args) {return \\java_invoke(\\java('${str}'),\$procedure,\$args);}" .
+        $instance = "namespace $package; class {$name} extends \\Java {" .
+            "static function type(\$sub=null){if(\$sub) \$sub='\$'.\$sub;return \\java('{$str}'.\"\$sub\");}" .
+            "static function __callStatic(\$procedure,\$args) {return \\java_invoke(\\java('{$str}'),\$procedure,\$args);}" .
             'function __construct() {$args=func_get_args();' .
             'array_unshift($args,' . "'$str'" . '); parent::__construct($args);}}';
         eval ("$instance");
@@ -252,7 +252,7 @@ if (!function_exists("java_get_base"))
                 $host   = $url["host"];
                 $port   = $url["port"];
                 $path   = $url["path"];
-                define("JAVA_HOSTS", "${scheme}${host}:${port}");
+                define("JAVA_HOSTS", "{$scheme}{$host}:{$port}");
                 $dir = dirname($path);
                 define("JAVA_SERVLET", "$dir/servlet.phpjavabridge");
                 return true;
@@ -1376,7 +1376,7 @@ if (!function_exists("java_get_base"))
         function fwrite($data)
         {
             $len = dechex(strlen($data));
-            return fwrite($this->peer, "${len}\r\n${data}\r\n");
+            return fwrite($this->peer, "{$len}\r\n{$data}\r\n");
         }
 
         function fread($size)
@@ -1480,7 +1480,7 @@ if (!function_exists("java_get_base"))
             $this->channel                 = new java_EmptyChannel($this);
             $this->channel                 = $this->getChannel($channelName);
             $this->protocol->socketHandler = new java_SocketHandler($this->protocol, $this->channel);
-            $this->protocol->write("\177${len0}${len1}${len2}${context}");
+            $this->protocol->write("\177{$len0}{$len1}{$len2}{$context}");
             $this->context           = sprintf("X_JAVABRIDGE_CONTEXT: %s\r\n", $context);
             $this->protocol->handler = $this->protocol->socketHandler;
             $this->protocol->handler->write($this->protocol->client->sendBuffer)
@@ -1675,7 +1675,7 @@ if (!function_exists("java_get_base"))
         function fwrite($data)
         {
             $len = dechex(strlen($data));
-            return fwrite($this->socket, "${len}\r\n${data}\r\n");
+            return fwrite($this->socket, "{$len}\r\n{$data}\r\n");
         }
 
         function close()
@@ -1727,7 +1727,7 @@ if (!function_exists("java_get_base"))
         function getBodyFor($compat, $data)
         {
             $len = dechex(2 + strlen($data));
-            return "Cache-Control: no-cache\r\nPragma: no-cache\r\nTransfer-Encoding: chunked\r\n\r\n${len}\r\n\177${compat}${data}\r\n";
+            return "Cache-Control: no-cache\r\nPragma: no-cache\r\nTransfer-Encoding: chunked\r\n\r\n{$len}\r\n\177{$compat}{$data}\r\n";
         }
 
         function write($data)
@@ -1851,7 +1851,7 @@ if (!function_exists("java_get_base"))
             if ($this->isRedirect)
             {
                 $this->protocol->socketHandler = new java_SocketHandler($this->protocol, $this->getChannel($channelName));
-                $this->protocol->write("\177${len0}${len1}${len2}${context}");
+                $this->protocol->write("\177{$len0}{$len1}{$len2}{$context}");
                 $this->context = sprintf("X_JAVABRIDGE_CONTEXT: %s\r\n", $context);
                 $this->close();
                 $this->protocol->handler = $this->protocol->socketHandler;
@@ -2005,7 +2005,7 @@ if (!function_exists("java_get_base"))
                 $host = $hostVec[1];
                 $port = $hostVec[2];
             }
-            $this->serverName = "${ssl}${host}:$port";
+            $this->serverName = "{$ssl}{$host}:$port";
             if ((array_key_exists("X_JAVABRIDGE_REDIRECT", $_SERVER)) ||
                 (array_key_exists("HTTP_X_JAVABRIDGE_REDIRECT", $_SERVER)))
             {
@@ -2040,7 +2040,7 @@ if (!function_exists("java_get_base"))
                 {
                     throw new java_IOException("Could not find $java in " . getcwd() . ". Download it from http://sf.net/projects/php-java-bridge/files/Binary%20package/php-java-bridge_" . JAVA_PEAR_VERSION . "/exploded/JavaBridge.jar/download and try again.");
                 }
-                $java_cmd = "java -Dphp.java.bridge.daemon=true -jar \"${java}\" INET_LOCAL:$channelName 0";
+                $java_cmd = "java -Dphp.java.bridge.daemon=true -jar \"{$java}\" INET_LOCAL:$channelName 0";
                 if (!$again)
                 {
                     throw new java_ConnectException("No Java back end! Please run it with: $java_cmd. Error message: $errstr ($errno)");
@@ -2174,7 +2174,7 @@ if (!function_exists("java_get_base"))
             $this->client->sendBuffer           .= $this->client->preparedToSendBuffer;
             $this->client->preparedToSendBuffer = null;
             $this->write(sprintf("<G p=\"1\" v=\"%x\" m=\"%s\">", $object, $method));
-            $this->client->currentArgumentsFormat = "<G p=\"2\" v=\"%x\" m=\"${method}\">";
+            $this->client->currentArgumentsFormat = "<G p=\"2\" v=\"%x\" m=\"{$method}\">";
         }
 
         function propertyAccessEnd()
@@ -2190,7 +2190,7 @@ if (!function_exists("java_get_base"))
             $this->client->sendBuffer           .= $this->client->preparedToSendBuffer;
             $this->client->preparedToSendBuffer = null;
             $this->write(sprintf("<Y p=\"1\" v=\"%x\" m=\"%s\">", $object, $method));
-            $this->client->currentArgumentsFormat = "<Y p=\"2\" v=\"%x\" m=\"${method}\">";
+            $this->client->currentArgumentsFormat = "<Y p=\"2\" v=\"%x\" m=\"{$method}\">";
         }
 
         function invokeEnd()
@@ -2923,12 +2923,12 @@ if (!function_exists("java_get_base"))
             $this->var = java_cast($javaProxy, "A");
         }
 
-        function rewind()
+        function rewind(): void
         {
             reset($this->var);
         }
 
-        function valid()
+        function valid(): bool
         {
             return $this->current() !== false;
         }
@@ -2939,12 +2939,12 @@ if (!function_exists("java_get_base"))
             return next($this->var);
         }
 
-        function key()
+        function key(): mixed
         {
             return key($this->var);
         }
 
-        function current()
+        function current(): mixed
         {
             return current($this->var);
         }
@@ -2961,13 +2961,13 @@ if (!function_exists("java_get_base"))
 
     class java_ArrayProxy extends java_IteratorProxy implements ArrayAccess
     {
-        function offsetExists($idx)
+        function offsetExists($idx): bool
         {
             $ar = [$this, $idx];
             return $this->__client->invokeMethod(0, "offsetExists", $ar);
         }
 
-        function offsetGet($idx)
+        function offsetGet($idx): mixed
         {
             $ar = [$this, $idx];
             return $this->__client->invokeMethod(0, "offsetGet", $ar);
@@ -3096,7 +3096,7 @@ if (!function_exists("java_get_base"))
         }
 
 
-        function offsetExists($idx)
+        function offsetExists($idx): bool
         {
             if (!isset($this->__delegate))
             {
@@ -3435,13 +3435,13 @@ if (!function_exists("java_get_base"))
             return $this->__delegate->__cast($type);
         }
 
-        function __sleep()
+        function __sleep(): array
         {
             $this->__delegate->__sleep();
             return ["__delegate"];
         }
 
-        function __wakeup()
+        function __wakeup(): void
         {
             $this->__delegate->__wakeup();
             $this->__java   = $this->__delegate->__java;
